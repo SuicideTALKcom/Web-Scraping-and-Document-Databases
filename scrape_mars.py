@@ -1,20 +1,18 @@
-# Import Dependecies 
+# Declare Dependecies 
 from bs4 import BeautifulSoup 
 from splinter import Browser
 import pandas as pd 
 import requests 
 
-# Initialize browser
-def init_browser(): 
     # Replace the path with your actual path to the chromedriver
 
-    #Mac Users
-    #executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
-    #return Browser('chrome', **executable_path, headless=False)
+    # Mac Users
+    # executable_path = {'executable_path': 'chromedriver.exe'}
+    # browser = Browser('chrome', **executable_path, headless=False)
 
-    #Windows Users
-    # executable_path = {'executable_path': '/Users/cantu/Desktop/Mission-to-Mars'}
-    # return Browser('chrome', **executable_path, headless=False)
+    # Windows Users
+    # executable_path = {'executable_path': 'chromedriver.exe'}
+    # browser = Browser('chrome', **executable_path, headless=False)
     exec_path = {'executable_path': 'chromedriver'}
     return Browser('chrome', headless=False, **exec_path)
 
@@ -23,12 +21,11 @@ mars = {}
 
 # NASA MARS NEWS
 def scrape_mars_news():
+
     try: 
 
         # Initialize browser 
         browser = init_browser()
-
-        #browser.is_element_present_by_css("div.content_title", wait_time=1)
 
         # Visit Nasa news url through splinter module
         url = 'https://mars.nasa.gov/news/'
@@ -39,7 +36,6 @@ def scrape_mars_news():
 
         # Parse HTML with Beautiful Soup
         soup = BeautifulSoup(html, 'html.parser')
-
 
         # Retrieve the latest element that contains news title and news_paragraph
         news_title = soup.find('div', class_='content_title').find('a').text
@@ -62,8 +58,6 @@ def scrape_mars_image():
 
         # Initialize browser 
         browser = init_browser()
-
-        #browser.is_element_present_by_css("img.jpg", wait_time=1)
 
         # Visit Mars Space Images through splinter module
         image_url_featured = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
@@ -91,11 +85,10 @@ def scrape_mars_image():
         mars['featured_image_url'] = featured_image_url 
         
         return mars
+
     finally:
 
         browser.quit()
-
-        
 
 # Mars Weather 
 def scrape_mars_weather():
@@ -104,8 +97,6 @@ def scrape_mars_weather():
 
         # Initialize browser 
         browser = init_browser()
-
-        #browser.is_element_present_by_css("div", wait_time=1)
 
         # Visit Mars Weather Twitter through splinter module
         weather_url = 'https://twitter.com/marswxreport?lang=en'
@@ -130,14 +121,14 @@ def scrape_mars_weather():
             else: 
                 pass
 
-        # Dictionary entry from WEATHER TWEET
-        mars['weather_tweet'] = weather_tweet
+         # Dictionary entry from WEATHER TWEET
+         mars['weather_tweet'] = weather_tweet
         
-        return mars
+         return mars
+    
     finally:
 
-        browser.quit()
-
+         browser.quit()
 
 # Mars Facts
 def scrape_mars_facts():
@@ -148,7 +139,7 @@ def scrape_mars_facts():
     # Use Panda's `read_html` to parse the url
     mars_facts = pd.read_html(facts_url)
 
-    # Find the mars facts DataFrame in the list of DataFrames as assign it to `mars_df`
+    # Find the mars facts DataFrame in the list of DataFrames and assign it to `mars_df`
     mars_df = mars_facts[0]
 
     # Assign the columns `['Description', 'Value']`
@@ -165,10 +156,7 @@ def scrape_mars_facts():
 
     return mars
 
-
 # MARS HEMISPHERES
-
-
 def scrape_mars_hemispheres():
 
     try: 
@@ -220,10 +208,10 @@ def scrape_mars_hemispheres():
 
         mars['hemi_urls'] = hemi_urls
 
-        
         # Return mars_data dictionary 
 
         return mars
+    
     finally:
 
         browser.quit()

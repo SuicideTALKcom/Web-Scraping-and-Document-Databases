@@ -4,6 +4,9 @@ from splinter import Browser
 import pandas as pd 
 import requests 
 
+# Initialize browser
+def init_browser():
+
     # Replace the path with your actual path to the chromedriver
 
     # Mac Users
@@ -121,14 +124,14 @@ def scrape_mars_weather():
             else: 
                 pass
 
-         # Dictionary entry from WEATHER TWEET
-         mars['weather_tweet'] = weather_tweet
+        # Dictionary entry from WEATHER TWEET
+        mars['weather_tweet'] = weather_tweet
         
-         return mars
-    
+        return mars
+
     finally:
 
-         browser.quit()
+        browser.quit()
 
 # Mars Facts
 def scrape_mars_facts():

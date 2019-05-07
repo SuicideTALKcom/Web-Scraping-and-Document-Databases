@@ -26,8 +26,8 @@
 	    <div class="thumbnail">
             <h2 class="text-primary pt-4">Latest Mars News</h2>
             <hr>
-            <h4>{{mars.news_title}}</h4>
-            <p>{{mars.news_p}}</p>
+            <h4>{{ mars.news_title }}</h4>
+            <p>{{ mars.news_paragraph }}</p>
             <br>
         </div>
         </div>
@@ -39,22 +39,29 @@
         <div class="col-lg-6 mb-6  border border-secondary" style="background-color:lightgrey;">
             <h2 class="text-primary pt-4">Featured Mars Image</h2>
             <hr>
-            <a href={{mars.featured_image_url}}>
-            <img class="img-responsive" src={{mars.featured_image_url}} alt="Featured Mars Image" style="width:100%"></a>
+            <a href={{ mars.featured_image_url }}>
+            <img class="img-responsive" src={{ mars.featured_image_url }} alt="Featured Mars Image" style="width:100%"></a>
         </div>
         <hr>
         <br>
         <div class="col-lg-6 mb-6 border border-secondary" style="background-color:lightgrey;">
             <h2 class="text-primary pt-4">Current weather on Mars</h2>
             <hr>
-            <p>{{mars.mars_weather}}</p>
+            <p>{{ mars.weather_tweet }}</p>
             <br>
         <div>
             <h2 class="text-primary pt-4">Mars Facts</h2>
             <hr>
+                <div style="max-width: 450px; max-height: 250px; font-size: 15px; margin-bottom: 25px; margin-left: 85px;">
+                {{ mars.mars_facts|safe}}
+                </div>
+                
+            <!--
             <table class="table table-sm table-striped table-bordered table-responsive-lg">
           	{{mars.mars_facts}}
-          	</table>
+              </table>
+            -->
+              
 			<br>
         </div>
   	</div>        
@@ -68,10 +75,10 @@
             <div class="col-md-12 border border-secondary" style="background-color:lightgrey;">
             <h2 class="text-primary pt-4 text-center">Mars Hemispheres</h2>
             </div>
-            {% for item in mars.hemisphere_image_urls %}   
+            {% for item in mars.hemi_urls %}   
         <div class="col-md-6 border border-secondary" style="background-color:lightgrey;">
-            <h5 class="text-info">{{item.title}}</h5>
-            <a href={{item.img_url}}><img class="img-responsive" src={{item.img_url}} style="width:100%"></a>
+            <h5 class="text-info">{{ item.title }}</h5>
+            <img class="img-responsive" src="{{ item.img_url }}" style="width:100%"></a>
         </div>
     {% endfor %}
     </div>
